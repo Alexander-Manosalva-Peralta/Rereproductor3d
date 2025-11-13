@@ -1,16 +1,23 @@
 {
-  "name": "Reproductor 3D",
-  "short_name": "Reproductor3D",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#1db954",
-  "icons": [
-    {
-      "src": "si.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
+"name": "Loom",
+"short_name": "Loom",
+"description": "Loom: Tu experiencia de audio inmersiva y visual.",
+"start_url": "./index.html",
+"display": "standalone",
+"background_color": "#1d1c20",
+"theme_color": "#b02a37",
+"icons": [
+{
+"src": "Se.png",
+"sizes": "192x192",
+"type": "image/png",
+"purpose": "maskable any"
+},
+{
+"src": "Se.png",
+"sizes": "512x512",
+"type": "image/png",
+"purpose": "maskable any"
+}
+]
 }
