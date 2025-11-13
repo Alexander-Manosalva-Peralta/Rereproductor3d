@@ -308,6 +308,10 @@
         /* === 🌐 RESPONSIVIDAD (ESTILO SPOTIFY MÓVIL) === */
 
         @media (max-width: 600px) {
+        .carousel-wrap {
+        justify-content:center;
+        padding-left:150px;
+        }
             /* === CRÍTICO: Habilitar Scroll y Flujo en el BODY === */
             html, body {
                 height: auto;

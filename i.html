@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor Musical Estilo Spotify</title>
-    <style>
         /* === VARIABLES Y FUENTES === */
         :root {
           --bg-top: #1d1c20;
@@ -322,7 +315,7 @@
                 overflow: auto; /* CLAVE: Permite el scroll vertical */
                 display: block; /* Desactiva el centrado rígido de desktop */
             }
-
+            
             /* === CRÍTICO: Convertir Stage en Contenedor Móvil === */
             .stage {
                 width: 100%;
@@ -356,7 +349,7 @@
                 margin-top: 10px;
                 perspective: 1200px; /* Ajustar perspectiva */
             }
-
+            
             .carousel {
                 width: 100%;
                 height: 250px;
@@ -364,7 +357,7 @@
 
             .card {
                 /* Reducir el tamaño de las tarjetas para que quepan */
-                --card-size: 140px;
+                --card-size: 140px; 
                 width: var(--card-size);
                 height: var(--card-size);
             }
@@ -373,12 +366,12 @@
                 transform: translate(-50%, -50%) scale(1.1) !important;
                 filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
             }
-
+            
             /* === CRÍTICO: La burbuja debe fluir debajo del carrusel === */
             .now-bubble {
                 position: relative; /* CLAVE: Ahora fluye */
                 top: auto;
-                transform: none;
+                transform: none; 
                 margin-top: 25px; /* Separación del carrusel */
                 width: 90%;
             }
@@ -393,11 +386,11 @@
                 align-items: center;
                 width: 95%;
                 gap: 15px;
-                margin-top: 25px;
+                margin-top: 25px; 
             }
-
+            
             .mini {
-                flex-direction: row;
+                flex-direction: row; 
                 justify-content: space-between;
                 width: 100%;
                 min-width: auto;
@@ -406,7 +399,7 @@
                 text-align: right;
             }
             .seek {
-                width: 100%;
+                width: 100%; 
                 margin: 0;
             }
             .controls {
@@ -426,94 +419,3 @@
                 transform: none;
             }
         }
-    </style>
-</head>
-<body>
-    <div class="stage">
-        <!-- 1. HUD SUPERIOR -->
-        <div class="hud-top">
-            <button class="active">Explorar</button>
-            <button>Mi Música</button>
-            <button id="toggle-lyrics-btn">Letras 📝</button> <!-- Botón para mostrar/ocultar letras -->
-        </div>
-
-        <!-- 2. CARRUSEL CENTRAL (Las imágenes 3D) -->
-        <div class="carousel-wrap">
-            <div class="carousel">
-                <!-- Tarjetas de ejemplo que mantienen el efecto 3D -->
-                <div class="card" style="transform: translate3d(-300px, 0, -200px) rotateY(15deg) translate(-50%, -50%); opacity: 0.5;">
-                    <span class="cover" style="background-image: url('https://placehold.co/250x250/555555/ffffff?text=3D+Album+1');"></span>
-                </div>
-                <div class="card center" style="transform: translate(-50%, -50%) scale(1.3);">
-                    <span class="cover" style="background-image: url('https://placehold.co/250x250/B02A37/ffffff?text=3D+Album+2');"></span>
-                </div>
-                <div class="card" style="transform: translate3d(300px, 0, -200px) rotateY(-15deg) translate(-50%, -50%); opacity: 0.5;">
-                    <span class="cover" style="background-image: url('https://placehold.co/250x250/333333/ffffff?text=3D+Album+3');"></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. BURBUJA DE CANCIÓN ACTUAL (Ahora apilada debajo del carrusel) -->
-        <div class="now-bubble">
-            Escuchando: <br> "Canción Apilada"
-        </div>
-
-        <!-- 4. REPRODUCTOR INFERIOR (Ahora apilado debajo de la burbuja) -->
-        <div class="player">
-            <div class="mini">
-                <div class="thumb">
-                    <span class="cover" style="background-image: url('https://placehold.co/56x56/B02A37/ffffff?text=C');"></span>
-                </div>
-                <div class="meta">
-                    <div class="track-title">Canción de Prueba</div>
-                    <div class="track-sub">Artista Fluido</div>
-                </div>
-            </div>
-
-            <div class="seek">
-                <div class="progress"><i></i></div>
-                <div class="time">2:30 / 4:15</div>
-            </div>
-
-            <div class="controls">
-                <div class="icon-btn">⏪</div>
-                <div class="icon-btn" style="background: var(--accent-1);">▶</div>
-                <div class="icon-btn">⏩</div>
-                <input type="range" id="volRange" min="0" max="100" value="70" style="width: 80px;">
-            </div>
-        </div>
-
-        <!-- 5. PANEL DE LETRAS (Apilado al final, se muestra u oculta) -->
-        <div class="lyrics-panel" id="lyrics-panel">
-            <h2>Letras de la Canción (Scrollable)</h2>
-            <div class="lyrics-line active">Las imágenes 3D están arriba.</div>
-            <div class="lyrics-line">El reproductor está en el medio.</div>
-            <div class="lyrics-line">Y el panel de letras está aquí abajo, listo para hacer scroll si es necesario.</div>
-            <div class="lyrics-line">Así es como Spotify apila su contenido en el móvil.</div>
-            <div class="lyrics-line">Todo es responsivo y se adapta.</div>
-            <div class="lyrics-line">Si te desplazas hacia abajo, el fondo se mantiene y solo el contenido se mueve.</div>
-            <div class="lyrics-line">Esto es un ejemplo largo para forzar el scroll.</div>
-            <div class="lyrics-line">Esto es un ejemplo largo para forzar el scroll.</div>
-            <div class="lyrics-line">Esto es un ejemplo largo para forzar el scroll.</div>
-            <div class="lyrics-line">Fin del apilamiento vertical.</div>
-        </div>
-    </div>
-
-    <script>
-        // Función para manejar la visibilidad del panel de letras
-        window.onload = function() {
-            const toggleButton = document.getElementById('toggle-lyrics-btn');
-            const lyricsPanel = document.getElementById('lyrics-panel');
-
-            // Ocultamos el panel por defecto en desktop (ya está oculto por CSS, pero para asegurar)
-            lyricsPanel.classList.remove('show');
-
-            if (toggleButton) {
-                toggleButton.addEventListener('click', function() {
-                    lyricsPanel.classList.toggle('show');
-                });
-            }
-        };
-    </script>
-</body>
-</html>
