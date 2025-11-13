@@ -320,8 +320,8 @@
             html, body {
                 height: auto;
                 min-height: 100vh;
-                overflow-x: hidden; /* CLAVE: Bloquea el scroll horizontal */
-                overflow-y: auto; /* Permite el scroll vertical */
+                overflow-x: hidden; /* Bloquea el scroll horizontal */
+                overflow-y: auto;
                 display: block;
             }
 
@@ -331,7 +331,7 @@
                 height: auto;
                 min-height: 100vh;
                 padding: 10px;
-                box-sizing: border-box; /* CRÍTICO: El padding no aumenta el ancho total */
+                box-sizing: border-box;
                 box-shadow: none;
                 background: rgba(0, 0, 0, 0.65);
                 display: flex;
@@ -341,7 +341,7 @@
                 border-radius: 0;
             }
 
-            /* === CRÍTICO: El HUD debe fluir al inicio y CENTRAR === */
+            /* === HUD debe fluir al inicio y CENTRAR === */
             .hud-top {
                 position: relative;
                 top: auto;
@@ -351,95 +351,97 @@
                 margin-top: 10px;
                 margin-bottom: 20px;
                 width: 95%;
-                justify-content: center; /* CORREGIDO: Centra los botones */
+                justify-content: center; /* Centra los botones */
+                padding: 10px;
             }
 
-            /* === Centrado del Carrusel 3D para móvil === */
+            /* === Centrado y Ajuste del Carrusel 3D para móvil === */
             .carousel-wrap {
                 width: 100%;
-                height: 250px;
+                height: 300px; /* Aumentar altura para imágenes más grandes */
                 margin-top: 10px;
                 perspective: 1200px;
                 display: flex;
-                justify-content: center; /* Centrado Horizontal Limpio */
+                justify-content: center; /* Centrado Horizontal */
                 align-items: center;
             }
 
             .carousel {
                 width: 90%;
-                max-width: 320px;
-                height: 250px;
+                max-width: 360px; /* Aumentar ancho máximo */
+                height: 300px;
             }
 
             .card {
-                --card-size: 150px;
+                --card-size: 180px; /* AUMENTADO: Imágenes más grandes */
                 width: var(--card-size);
                 height: var(--card-size);
             }
             .card.center {
-                transform: translate(-50%, -50%) scale(1.1) !important;
+                transform: translate(-50%, -50%) scale(1.3) !important; /* AUMENTADO: Más cerca */
                 filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
             }
 
-            /* === CRÍTICO: La burbuja debe fluir debajo del carrusel y CENTRAR === */
+            /* === Burbuja de Canción Actual === */
             .now-bubble {
                 position: relative;
                 top: auto;
                 transform: none;
                 margin-top: 25px;
                 width: 90%;
-                margin-left: auto; /* Centrar con margin */
+                margin-left: auto;
                 margin-right: auto;
             }
 
-            /* === CRÍTICO: El Reproductor debe fluir debajo y CENTRAR METADATOS === */
+            /* === Reproductor y REVERSIÓN DEL TEXTO === */
             .player {
                 position: relative;
                 bottom: auto;
                 left: auto;
                 transform: none;
-                flex-direction: column;
+                flex-direction: row; /* Vuelve a ser fila */
                 align-items: center;
                 width: 95%;
                 gap: 15px;
                 margin-top: 25px;
                 padding: 15px 10px;
+                justify-content: space-between;
             }
 
             .mini {
-                flex-direction: column; /* CORREGIDO: Apilamos imagen y texto */
-                align-items: center; /* CORREGIDO: Centramos la imagen y el texto */
-                width: 100%;
-                min-width: auto;
-                gap: 8px; /* Espacio reducido */
+                flex-direction: row; /* VUELTO: Imagen y texto en fila */
+                align-items: center;
+                width: auto;
+                min-width: 0;
+                gap: 12px;
             }
 
             .mini .meta {
-                text-align: center; /* CORREGIDO: Centrar el nombre de la canción */
+                text-align: left; /* VUELTO: Alineación de texto original */
                 min-width: auto;
             }
 
             .seek {
-                width: 100%;
-                margin: 0;
-            }
-            .controls {
-                width: 100%;
-                justify-content: space-around;
+                display: none; /* Simplificamos la barra de búsqueda en móvil para el look compacto */
             }
 
-            /* CRÍTICO: Panel de Letras se apila al final y asegura Scrollbar */
+            .controls {
+                width: auto;
+                justify-content: flex-end; /* Alinear a la derecha los controles */
+            }
+
+            /* Panel de Letras se apila al final y asegura Scrollbar */
             .lyrics-panel {
                 position: relative;
                 bottom: auto;
                 right: auto;
                 width: 95%;
-                max-width: 95%; /* Asegurar que no desborde */
+                max-width: 95%;
                 font-size: 14px;
                 max-height: 50vh;
                 margin: 25px auto 30px auto;
                 transform: none;
-                box-sizing: border-box; /* Asegura que el padding no desborde el scroll */
+                box-sizing: border-box;
                 padding: 15px;
             }
         }
