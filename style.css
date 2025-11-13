@@ -1,4 +1,4 @@
-/* === VARIABLES Y FUENTES === */
+        /* === VARIABLES Y FUENTES === */
         :root {
           --bg-top: #1d1c20;
           --bg-bottom: #4b4a4f;
@@ -11,44 +11,43 @@
           font-family: "Inter", system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
         }
 
-        /* === FONDO Y CUERPO - AHORA SCROLLEABLE Y FLUIDO === */
+        /* === FONDO Y CUERPO === */
         html, body {
-          min-height: 100vh; /* Asegura que ocupe todo el viewport */
+          height: 100%;
           margin: 0;
           background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
-          /* Usando un placeholder, reemplaza con tu imagen si está en 'assets/img/fondo14.jpg' */
-          background-image: url('assets/img/fondo14.jpg');
+          /* Placeholder de imagen para que sea ejecutable, reemplaza con tu 'assets/img/fondo14.jpg' */
+          background-image: url('https://placehold.co/1920x1080/0A0A0A/ffffff?text=Fondo+Musical+Oscuro');
           background-size: cover;
           background-position: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           color: #fff;
-          /* REMOVIDO: overflow: hidden; y el centrado rígido */
-          overflow-x: hidden; /* Evita scroll horizontal */
+          overflow: hidden; /* Desktop: Fijo */
         }
 
-        /* === ESCENARIO PRINCIPAL - FLUIDO Y FLEXIBLE === */
+        /* === ESCENARIO PRINCIPAL === */
         .stage {
-          width: 95%; /* Ancho responsivo */
-          max-width: 1180px; /* Mantiene el límite en pantallas grandes */
-          height: auto;
-          min-height: 100vh;
+          width: 1180px;
+          height: 720px;
           border-radius: 12px;
           position: relative;
-          overflow: visible; /* Permitimos que el contenido fluya */
+          overflow: hidden;
           box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
           background: rgba(0, 0, 0, 0.45);
           display: flex;
-          flex-direction: column; /* Apila todos los elementos verticalmente */
+          flex-direction: column;
           align-items: center;
-          margin: 0 auto; /* Centra el contenedor principal */
-          padding: 20px 0; /* Padding vertical para el scroll */
+          justify-content: center;
         }
 
-        /* === HUD SUPERIOR - FLUYE EN EL LAYOUT === */
+        /* === HUD SUPERIOR === */
         .hud-top {
-          /* Cambiado de absolute a static para que fluya */
-          position: static;
-          margin-top: 10px;
-          margin-bottom: 20px;
+          position: absolute;
+          top: 28px;
+          left: 50%;
+          transform: translateX(-50%);
           z-index: 30;
           display: flex;
           gap: 12px;
@@ -60,7 +59,6 @@
           font-weight: 700;
           font-size: 14px;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-          order: 1; /* Mantiene la posición superior */
         }
 
         .hud-top button {
@@ -76,18 +74,17 @@
           background: rgba(255, 255, 255, 0.06);
         }
 
-        /* === CARRUSEL CENTRAL - SEGUNDO EN EL STACK === */
+        /* === CARRUSEL CENTRAL === */
         .carousel-wrap {
           position: relative;
           z-index: 8;
           width: 100%;
-          height: 420px; /* Mantenemos una altura fija para el efecto 3D en desktop */
+          height: 420px;
           display: flex;
           align-items: center;
           justify-content: center;
           perspective: 1800px;
-          margin-top: 0;
-          order: 2;
+          margin-top: 60px;
         }
 
         .carousel {
@@ -134,12 +131,11 @@
           filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.55));
         }
 
-        /* === BURBUJA DE CANCIÓN ACTUAL - POSICIONAMIENTO RELATIVO AL CARRUSEL === */
+        /* === BURBUJA DE CANCIÓN ACTUAL === */
         .now-bubble {
           position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateY(-50%) translateX(-150%); /* Posicionamiento original para desktop */
+          top: 54%;
+          transform: translateY(-50%);
           z-index: 40;
           background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.55));
           padding: 10px 16px;
@@ -149,13 +145,12 @@
           backdrop-filter: blur(6px);
         }
 
-        /* === REPRODUCTOR INFERIOR - TERCERO EN EL STACK, FLUIDO === */
+        /* === REPRODUCTOR INFERIOR === */
         .player {
-          /* Cambiado de absolute a relative para que fluya */
-          position: relative;
-          bottom: auto;
-          left: auto;
-          transform: none;
+          position: absolute;
+          bottom: 28px;
+          left: 50%;
+          transform: translateX(-50%);
           z-index: 40;
           display: flex;
           align-items: center;
@@ -165,12 +160,10 @@
           padding: 12px 18px;
           border-radius: 30px;
           box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
-          width: 95%; /* Ancho fluido */
+          width: 78%;
           max-width: 980px;
           color: #fff;
           justify-content: space-between;
-          margin-top: 40px; /* Espacio vertical */
-          order: 3;
         }
 
         .controls {
@@ -251,16 +244,13 @@
           opacity: 0.9;
         }
 
-        /* === PANEL DE LETRAS - CUARTO EN EL STACK, SCROLLEABLE === */
+        /* === PANEL DE LETRAS === */
         .lyrics-panel {
-          /* Cambiado de absolute a relative para que fluya debajo del reproductor */
-          position: relative;
-          right: auto;
-          bottom: auto;
-          margin: 30px auto 20px auto; /* Centrado y con espacio */
-          width: 95%; /* Ancho fluido */
-          max-width: 980px;
-          max-height: 400px; /* Altura máxima para permitir scroll */
+          position: absolute;
+          right: 30px;
+          bottom: 100px;
+          width: 360px;
+          max-height: 70vh;
           background: rgba(40, 0, 0, 0.30);
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 60, 60, 0.15);
@@ -273,13 +263,12 @@
           font-size: 15px;
           line-height: 1.6;
           letter-spacing: 0.3px;
-          opacity: 1; /* Mostrar por defecto para ver el layout */
-          transform: none; /* Quitamos la animación de aparición por ahora */
+          opacity: 0;
+          transform: translateY(20px) scale(0.98);
           transition: all 0.45s ease;
           white-space: pre-wrap;
           z-index: 15;
           pointer-events: auto;
-          order: 4;
         }
 
         .lyrics-panel.show {
@@ -316,126 +305,117 @@
           text-shadow: 0 0 8px rgba(255, 80, 80, 0.8);
         }
 
-        /* === 🌐 RESPONSIVIDAD === */
+        /* === 🌐 RESPONSIVIDAD (ESTILO SPOTIFY MÓVIL) === */
 
-        /* Ajustes para tablet/escritorio pequeño */
-        @media (max-width: 1024px) {
-          .stage {
-            width: 98%;
-          }
-
-          .carousel-wrap {
-             /* Reducir altura del carrusel */
-            height: 380px;
-          }
-
-          .player {
-            width: 98%;
-            /* Forzar el flex wrap para que se acomoden los elementos en el reproductor */
-            flex-wrap: wrap;
-            justify-content: center;
-          }
-
-          .mini, .seek, .controls {
-            /* Asegura que los componentes del reproductor tomen el ancho completo si es necesario */
-            width: 100%;
-            justify-content: center;
-            margin: 5px 0;
-          }
-
-          .lyrics-panel {
-            width: 98%;
-          }
-        }
-
-        /* Ajustes para móvil */
         @media (max-width: 600px) {
-          .stage {
-            width: 100%;
-            border-radius: 0; /* Full screen en móvil */
-            box-shadow: none;
-            padding: 10px 0;
-          }
+            /* === CRÍTICO: Habilitar Scroll y Flujo en el BODY === */
+            html, body {
+                height: auto;
+                min-height: 100vh;
+                overflow: auto; /* CLAVE: Permite el scroll vertical */
+                display: block; /* Desactiva el centrado rígido de desktop */
+            }
 
-          .hud-top {
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 12px;
-          }
+            /* === CRÍTICO: Convertir Stage en Contenedor Móvil === */
+            .stage {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                padding: 10px;
+                box-shadow: none;
+                background: rgba(0, 0, 0, 0.65);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: visible; /* CRÍTICO: Permite que el contenido fluya */
+                border-radius: 0;
+            }
 
-          /* Carrusel más compacto */
-          .carousel-wrap {
-            height: 280px;
-          }
+            /* === CRÍTICO: El HUD debe fluir al inicio === */
+            .hud-top {
+                position: relative; /* CLAVE: Ahora fluye */
+                top: auto;
+                left: auto;
+                transform: none;
+                font-size: 12px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
 
-          .carousel {
-            height: 280px;
-          }
+            /* === Ajustar Carrusel 3D para móvil === */
+            .carousel-wrap {
+                width: 100%;
+                height: 250px; /* Reducción de altura para móvil */
+                margin-top: 10px;
+                perspective: 1200px; /* Ajustar perspectiva */
+            }
 
-          .card {
-            --card-size: 160px; /* Tamaño de tarjeta más pequeño */
-          }
+            .carousel {
+                width: 100%;
+                height: 250px;
+            }
 
-          .card.center {
-            transform: translate(-50%, -50%) scale(1.1) !important;
-          }
+            .card {
+                /* Reducir el tamaño de las tarjetas para que quepan */
+                --card-size: 140px;
+                width: var(--card-size);
+                height: var(--card-size);
+            }
+            .card.center {
+                /* Reducir la escala para que se vea bien en el centro */
+                transform: translate(-50%, -50%) scale(1.1) !important;
+                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
+            }
 
-          /* La burbuja de canción ahora se posiciona debajo del carrusel */
-          .now-bubble {
-            position: relative;
-            transform: none;
-            left: auto;
-            margin-top: 20px;
-            width: 80%;
-            max-width: 300px;
-          }
+            /* === CRÍTICO: La burbuja debe fluir debajo del carrusel === */
+            .now-bubble {
+                position: relative; /* CLAVE: Ahora fluye */
+                top: auto;
+                transform: none;
+                margin-top: 25px; /* Separación del carrusel */
+                width: 90%;
+            }
 
-          .player {
-            width: 95%;
-            padding: 15px;
-            /* Se asegura que el reproductor apile bien sus elementos */
-            flex-direction: column;
-            gap: 15px;
-            border-radius: 20px;
-            margin-top: 25px;
-          }
+            /* === CRÍTICO: El Reproductor debe fluir debajo de la burbuja === */
+            .player {
+                position: relative; /* CLAVE: Ahora fluye */
+                bottom: auto;
+                left: auto;
+                transform: none;
+                flex-direction: column;
+                align-items: center;
+                width: 95%;
+                gap: 15px;
+                margin-top: 25px;
+            }
 
-          /* Miniatura y meta apilados en el reproductor */
-          .mini {
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-            min-width: auto;
-          }
+            .mini {
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                min-width: auto;
+            }
+            .mini .meta {
+                text-align: right;
+            }
+            .seek {
+                width: 100%;
+                margin: 0;
+            }
+            .controls {
+                width: 100%;
+                justify-content: space-around;
+            }
 
-          .mini .thumb {
-            width: 50px;
-            height: 50px;
-          }
-
-          .mini .meta {
-            min-width: 60%;
-            text-align: right;
-          }
-
-          /* Reordenamos los elementos del reproductor para que los controles queden abajo de la barra de progreso */
-          .seek {
-            order: 1;
-            width: 100%;
-          }
-
-          .controls {
-            order: 2;
-            width: 100%;
-            justify-content: space-around;
-          }
-
-          /* Panel de letras en móvil */
-          .lyrics-panel {
-            width: 95%;
-            font-size: 13px;
-            padding: 15px;
-            max-height: 60vh;
-            margin: 20px auto;
-          }
+            /* === CRÍTICO: Panel de Letras se apila al final === */
+            .lyrics-panel {
+                position: relative; /* CLAVE: Ahora fluye al final de todo */
+                bottom: auto;
+                right: auto;
+                width: 95%;
+                font-size: 14px;
+                max-height: 50vh;
+                margin: 25px auto 30px auto; /* Espacio y centrado */
+                transform: none;
+            }
         }
