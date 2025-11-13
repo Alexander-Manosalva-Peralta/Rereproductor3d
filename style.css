@@ -1,400 +1,441 @@
 /* === VARIABLES Y FUENTES === */
-:root {
-  --bg-top: #1d1c20;
-  --bg-bottom: #4b4a4f;
-  --hud-bg: rgba(36, 36, 36, 0.55);
-  --player-bg: rgba(22, 22, 22, 0.78);
-  --accent-1: #b02a37;
-  --accent-2: #ff5555;
-  --card-size: 250px;
-  --card-radius: 20px;
-  font-family: "Inter", system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-}
+        :root {
+          --bg-top: #1d1c20;
+          --bg-bottom: #4b4a4f;
+          --hud-bg: rgba(36, 36, 36, 0.55);
+          --player-bg: rgba(22, 22, 22, 0.78);
+          --accent-1: #b02a37;
+          --accent-2: #ff5555;
+          --card-size: 250px;
+          --card-radius: 20px;
+          font-family: "Inter", system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+        }
 
-/* === FONDO Y CUERPO === */
-html, body {
-  height: 100%;
-  margin: 0;
-  background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
-  background-image: url('assets/img/fondo14.jpg');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  overflow: hidden;
-}
+        /* === FONDO Y CUERPO - AHORA SCROLLEABLE Y FLUIDO === */
+        html, body {
+          min-height: 100vh; /* Asegura que ocupe todo el viewport */
+          margin: 0;
+          background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+          /* Usando un placeholder, reemplaza con tu imagen si está en 'assets/img/fondo14.jpg' */
+          background-image: url('assets/img/fondo14.jpg');
+          background-size: cover;
+          background-position: center;
+          color: #fff;
+          /* REMOVIDO: overflow: hidden; y el centrado rígido */
+          overflow-x: hidden; /* Evita scroll horizontal */
+        }
 
-/* === ESCENARIO PRINCIPAL === */
-.stage {
-  width: 1180px;
-  height: 720px;
-  border-radius: 12px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+        /* === ESCENARIO PRINCIPAL - FLUIDO Y FLEXIBLE === */
+        .stage {
+          width: 95%; /* Ancho responsivo */
+          max-width: 1180px; /* Mantiene el límite en pantallas grandes */
+          height: auto;
+          min-height: 100vh;
+          border-radius: 12px;
+          position: relative;
+          overflow: visible; /* Permitimos que el contenido fluya */
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+          background: rgba(0, 0, 0, 0.45);
+          display: flex;
+          flex-direction: column; /* Apila todos los elementos verticalmente */
+          align-items: center;
+          margin: 0 auto; /* Centra el contenedor principal */
+          padding: 20px 0; /* Padding vertical para el scroll */
+        }
 
-/* === HUD SUPERIOR === */
-.hud-top {
-  position: absolute;
-  top: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 30;
-  display: flex;
-  gap: 12px;
-  background: var(--hud-bg);
-  backdrop-filter: blur(8px);
-  padding: 10px 18px;
-  border-radius: 30px;
-  color: #fff;
-  font-weight: 700;
-  font-size: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
+        /* === HUD SUPERIOR - FLUYE EN EL LAYOUT === */
+        .hud-top {
+          /* Cambiado de absolute a static para que fluya */
+          position: static;
+          margin-top: 10px;
+          margin-bottom: 20px;
+          z-index: 30;
+          display: flex;
+          gap: 12px;
+          background: var(--hud-bg);
+          backdrop-filter: blur(8px);
+          padding: 10px 18px;
+          border-radius: 30px;
+          color: #fff;
+          font-weight: 700;
+          font-size: 14px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          order: 1; /* Mantiene la posición superior */
+        }
 
-.hud-top button {
-  background: transparent;
-  border: 0;
-  color: inherit;
-  padding: 8px 12px;
-  border-radius: 18px;
-  cursor: pointer;
-}
+        .hud-top button {
+          background: transparent;
+          border: 0;
+          color: inherit;
+          padding: 8px 12px;
+          border-radius: 18px;
+          cursor: pointer;
+        }
 
-.hud-top button.active {
-  background: rgba(255, 255, 255, 0.06);
-}
+        .hud-top button.active {
+          background: rgba(255, 255, 255, 0.06);
+        }
 
-/* === CARRUSEL CENTRAL === */
-.carousel-wrap {
-  position: relative;
-  z-index: 8;
-  width: 100%;
-  height: 420px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1800px;
-  margin-top: 60px;
-}
+        /* === CARRUSEL CENTRAL - SEGUNDO EN EL STACK === */
+        .carousel-wrap {
+          position: relative;
+          z-index: 8;
+          width: 100%;
+          height: 420px; /* Mantenemos una altura fija para el efecto 3D en desktop */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          perspective: 1800px;
+          margin-top: 0;
+          order: 2;
+        }
 
-.carousel {
-  width: 760px;
-  height: 360px;
-  transform-style: preserve-3d;
-  transition: transform 600ms cubic-bezier(.22, .9, .38, 1);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        .carousel {
+          width: 760px;
+          height: 360px;
+          transform-style: preserve-3d;
+          transition: transform 600ms cubic-bezier(.22, .9, .38, 1);
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
-.card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: var(--card-size);
-  height: var(--card-size);
-  transform-style: preserve-3d;
-  translate: -50% -50%;
-  border-radius: var(--card-radius);
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
-  transition: transform 700ms cubic-bezier(.22, .9, .38, 1), opacity 500ms ease, filter 400ms;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
+        .card {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: var(--card-size);
+          height: var(--card-size);
+          transform-style: preserve-3d;
+          translate: -50% -50%;
+          border-radius: var(--card-radius);
+          overflow: hidden;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+          transition: transform 700ms cubic-bezier(.22, .9, .38, 1), opacity 500ms ease, filter 400ms;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(255, 255, 255, 0.04);
+        }
 
-.card .cover {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  display: block;
-}
+        .card .cover {
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          display: block;
+        }
 
-.card.center {
-  transform: translate(-50%, -50%) scale(1.3) !important;
-  z-index: 100;
-  filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.55));
-}
+        .card.center {
+          transform: translate(-50%, -50%) scale(1.3) !important;
+          z-index: 100;
+          filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.55));
+        }
 
-/* === BURBUJA DE CANCIÓN ACTUAL === */
-.now-bubble {
-  position: absolute;
-  top: 54%;
-  transform: translateY(-50%);
-  z-index: 40;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.55));
-  padding: 10px 16px;
-  border-radius: 20px;
-  font-weight: 700;
-  text-align: center;
-  backdrop-filter: blur(6px);
-}
+        /* === BURBUJA DE CANCIÓN ACTUAL - POSICIONAMIENTO RELATIVO AL CARRUSEL === */
+        .now-bubble {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-150%); /* Posicionamiento original para desktop */
+          z-index: 40;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.55));
+          padding: 10px 16px;
+          border-radius: 20px;
+          font-weight: 700;
+          text-align: center;
+          backdrop-filter: blur(6px);
+        }
 
-/* === REPRODUCTOR INFERIOR === */
-.player {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: var(--player-bg);
-  backdrop-filter: blur(6px);
-  padding: 12px 18px;
-  border-radius: 30px;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
-  width: 78%;
-  max-width: 980px;
-  color: #fff;
-  justify-content: space-between;
-}
+        /* === REPRODUCTOR INFERIOR - TERCERO EN EL STACK, FLUIDO === */
+        .player {
+          /* Cambiado de absolute a relative para que fluya */
+          position: relative;
+          bottom: auto;
+          left: auto;
+          transform: none;
+          z-index: 40;
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          background: var(--player-bg);
+          backdrop-filter: blur(6px);
+          padding: 12px 18px;
+          border-radius: 30px;
+          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+          width: 95%; /* Ancho fluido */
+          max-width: 980px;
+          color: #fff;
+          justify-content: space-between;
+          margin-top: 40px; /* Espacio vertical */
+          order: 3;
+        }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+        .controls {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
 
-.icon-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  font-weight: 800;
-}
+        .icon-btn {
+          width: 44px;
+          height: 44px;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.05);
+          display: grid;
+          place-items: center;
+          cursor: pointer;
+          font-weight: 800;
+        }
 
-.icon-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
+        .icon-btn:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
 
-#volRange {
-  accent-color: var(--accent-1);
-}
+        #volRange {
+          accent-color: var(--accent-1);
+        }
 
-.seek {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 12px;
-}
+        .seek {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin: 0 12px;
+        }
 
-.mini {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 260px;
-}
+        .mini {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          min-width: 260px;
+        }
 
-.mini .thumb {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
-}
+        .mini .thumb {
+          width: 56px;
+          height: 56px;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+        }
 
-.mini .meta {
-  min-width: 150px;
-}
+        .mini .meta {
+          min-width: 150px;
+        }
 
-.progress {
-  height: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 999px;
-  flex: 1;
-  overflow: hidden;
-}
+        .progress {
+          height: 10px;
+          background: rgba(255, 255, 255, 0.06);
+          border-radius: 999px;
+          flex: 1;
+          overflow: hidden;
+        }
 
-.progress > i {
-  display: block;
-  height: 100%;
-  width: 28%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-}
+        .progress > i {
+          display: block;
+          height: 100%;
+          width: 28%;
+          border-radius: 999px;
+          background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+        }
 
-.track-title {
-  font-weight: 800;
-  font-size: 14px;
-}
+        .track-title {
+          font-weight: 800;
+          font-size: 14px;
+        }
 
-.track-sub {
-  font-size: 12px;
-  opacity: 0.9;
-}
+        .track-sub {
+          font-size: 12px;
+          opacity: 0.9;
+        }
 
-/* === PANEL DE LETRAS === */
-.lyrics-panel {
-  position: absolute;
-  right: 30px;
-  bottom: 100px;
-  width: 360px;
-  max-height: 70vh;
-  background: rgba(40, 0, 0, 0.30);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 60, 60, 0.15);
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  color: #f8f8f8;
-  font-size: 15px;
-  line-height: 1.6;
-  letter-spacing: 0.3px;
-  opacity: 0;
-  transform: translateY(20px) scale(0.98);
-  transition: all 0.45s ease;
-  white-space: pre-wrap;
-  z-index: 15;
-  pointer-events: auto;
-}
+        /* === PANEL DE LETRAS - CUARTO EN EL STACK, SCROLLEABLE === */
+        .lyrics-panel {
+          /* Cambiado de absolute a relative para que fluya debajo del reproductor */
+          position: relative;
+          right: auto;
+          bottom: auto;
+          margin: 30px auto 20px auto; /* Centrado y con espacio */
+          width: 95%; /* Ancho fluido */
+          max-width: 980px;
+          max-height: 400px; /* Altura máxima para permitir scroll */
+          background: rgba(40, 0, 0, 0.30);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 60, 60, 0.15);
+          border-radius: 20px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+          padding: 20px;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          color: #f8f8f8;
+          font-size: 15px;
+          line-height: 1.6;
+          letter-spacing: 0.3px;
+          opacity: 1; /* Mostrar por defecto para ver el layout */
+          transform: none; /* Quitamos la animación de aparición por ahora */
+          transition: all 0.45s ease;
+          white-space: pre-wrap;
+          z-index: 15;
+          pointer-events: auto;
+          order: 4;
+        }
 
-.lyrics-panel.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
+        .lyrics-panel.show {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
 
-.lyrics-panel::-webkit-scrollbar {
-  width: 6px;
-}
+        .lyrics-panel::-webkit-scrollbar {
+          width: 6px;
+        }
 
-.lyrics-panel::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
+        .lyrics-panel::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
+        }
 
-.lyrics-panel::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff3d3d, #6b0000);
-  border-radius: 10px;
-}
+        .lyrics-panel::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #ff3d3d, #6b0000);
+          border-radius: 10px;
+        }
 
-.lyrics-panel::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #ff5555, #8b0000);
-}
+        .lyrics-panel::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #ff5555, #8b0000);
+        }
 
-.lyrics-line {
-  opacity: 0.7;
-  transition: all 0.3s ease;
-}
+        .lyrics-line {
+          opacity: 0.7;
+          transition: all 0.3s ease;
+        }
 
-.lyrics-line.active {
-  opacity: 1;
-  color: #ff4d4d;
-  text-shadow: 0 0 8px rgba(255, 80, 80, 0.8);
-}
+        .lyrics-line.active {
+          opacity: 1;
+          color: #ff4d4d;
+          text-shadow: 0 0 8px rgba(255, 80, 80, 0.8);
+        }
 
-/* === 🌐 RESPONSIVIDAD === */
-@media (max-width: 1024px) {
-  .stage {
-    width: 90%;
-    height: auto;
-    padding: 20px;
-  }
+        /* === 🌐 RESPONSIVIDAD === */
 
-  .carousel {
-    width: 90%;
-    height: auto;
-  }
+        /* Ajustes para tablet/escritorio pequeño */
+        @media (max-width: 1024px) {
+          .stage {
+            width: 98%;
+          }
 
-  .player {
-    width: 90%;
-    flex-direction: column;
-    gap: 10px;
-  }
+          .carousel-wrap {
+             /* Reducir altura del carrusel */
+            height: 380px;
+          }
 
-  .lyrics-panel {
-    position: relative;
-    width: 100%;
-    max-height: 50vh;
-    margin-top: 10px;
-  }
-}
+          .player {
+            width: 98%;
+            /* Forzar el flex wrap para que se acomoden los elementos en el reproductor */
+            flex-wrap: wrap;
+            justify-content: center;
+          }
 
-@media (max-width: 600px) {
-  body {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+          .mini, .seek, .controls {
+            /* Asegura que los componentes del reproductor tomen el ancho completo si es necesario */
+            width: 100%;
+            justify-content: center;
+            margin: 5px 0;
+          }
 
-  .stage {
-    width: 100%;
-    height: auto;
-    padding: 10px;
-    box-shadow: none;
-    background: rgba(0, 0, 0, 0.65);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+          .lyrics-panel {
+            width: 98%;
+          }
+        }
 
-  .carousel-wrap {
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-  }
+        /* Ajustes para móvil */
+        @media (max-width: 600px) {
+          .stage {
+            width: 100%;
+            border-radius: 0; /* Full screen en móvil */
+            box-shadow: none;
+            padding: 10px 0;
+          }
 
-  .carousel {
-    width: 100%;
-    height: auto;
-  }
+          .hud-top {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 12px;
+          }
 
-  .player {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    gap: 12px;
-    margin-top: 15px;
-  }
+          /* Carrusel más compacto */
+          .carousel-wrap {
+            height: 280px;
+          }
 
-  .mini {
-    flex-direction: column;
-    align-items: center;
-    min-width: auto;
-  }
+          .carousel {
+            height: 280px;
+          }
 
-  .mini .thumb {
-    width: 100px;
-    height: 100px;
-  }
+          .card {
+            --card-size: 160px; /* Tamaño de tarjeta más pequeño */
+          }
 
-  .lyrics-panel {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    width: 100%;
-    font-size: 14px;
-    max-height: 50vh;
-    margin-top: 10px;
-    border-radius: 15px;
-  }
+          .card.center {
+            transform: translate(-50%, -50%) scale(1.1) !important;
+          }
 
-  .hud-top {
-    top: 10px;
-    font-size: 12px;
-  }
-}
+          /* La burbuja de canción ahora se posiciona debajo del carrusel */
+          .now-bubble {
+            position: relative;
+            transform: none;
+            left: auto;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 300px;
+          }
+
+          .player {
+            width: 95%;
+            padding: 15px;
+            /* Se asegura que el reproductor apile bien sus elementos */
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 20px;
+            margin-top: 25px;
+          }
+
+          /* Miniatura y meta apilados en el reproductor */
+          .mini {
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            min-width: auto;
+          }
+
+          .mini .thumb {
+            width: 50px;
+            height: 50px;
+          }
+
+          .mini .meta {
+            min-width: 60%;
+            text-align: right;
+          }
+
+          /* Reordenamos los elementos del reproductor para que los controles queden abajo de la barra de progreso */
+          .seek {
+            order: 1;
+            width: 100%;
+          }
+
+          .controls {
+            order: 2;
+            width: 100%;
+            justify-content: space-around;
+          }
+
+          /* Panel de letras en móvil */
+          .lyrics-panel {
+            width: 95%;
+            font-size: 13px;
+            padding: 15px;
+            max-height: 60vh;
+            margin: 20px auto;
+          }
+        }
