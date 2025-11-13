@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor Responsivo Corregido</title>
+    <style>
         /* === VARIABLES Y FUENTES === */
         :root {
           --bg-top: #1d1c20;
@@ -10,7 +17,7 @@
           --card-radius: 20px;
           font-family: "Inter", system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
         }
-        
+
         /* === FONDO Y CUERPO - CORREGIDO PARA FLUIDEZ EN MÓVIL === */
         html, body {
           /* Estilo base (desktop) - Mantenemos height: 100% y overflow: hidden */
@@ -18,16 +25,16 @@
           margin: 0;
           background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
           /* Usando un placeholder para que el código sea ejecutable */
-          background-image: url('https://placehold.co/1920x1080/000000/ffffff?text=Fondo+Musical'); 
+          background-image: url('https://placehold.co/1920x1080/000000/ffffff?text=Fondo+Musical');
           background-size: cover;
           background-position: center;
           display: flex;
           align-items: center;
           justify-content: center;
           color: #fff;
-          overflow: hidden; 
+          overflow: hidden;
         }
-        
+
         /* === ESCENARIO PRINCIPAL === */
         .stage {
           width: 1180px;
@@ -42,7 +49,7 @@
           align-items: center;
           justify-content: center;
         }
-        
+
         /* === HUD SUPERIOR === */
         .hud-top {
           position: absolute;
@@ -61,7 +68,7 @@
           font-size: 14px;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        
+
         .hud-top button {
           background: transparent;
           border: 0;
@@ -70,11 +77,11 @@
           border-radius: 18px;
           cursor: pointer;
         }
-        
+
         .hud-top button.active {
           background: rgba(255, 255, 255, 0.06);
         }
-        
+
         /* === CARRUSEL CENTRAL === */
         .carousel-wrap {
           position: relative;
@@ -87,7 +94,7 @@
           perspective: 1800px;
           margin-top: 60px;
         }
-        
+
         .carousel {
           width: 760px;
           height: 360px;
@@ -98,7 +105,7 @@
           align-items: center;
           justify-content: center;
         }
-        
+
         .card {
           position: absolute;
           top: 50%;
@@ -117,7 +124,7 @@
           justify-content: center;
           border: 1px solid rgba(255, 255, 255, 0.04);
         }
-        
+
         .card .cover {
           width: 100%;
           height: 100%;
@@ -125,13 +132,13 @@
           background-position: center;
           display: block;
         }
-        
+
         .card.center {
           transform: translate(-50%, -50%) scale(1.3) !important;
           z-index: 100;
           filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.55));
         }
-        
+
         /* === BURBUJA DE CANCIÓN ACTUAL === */
         .now-bubble {
           position: absolute;
@@ -145,7 +152,7 @@
           text-align: center;
           backdrop-filter: blur(6px);
         }
-        
+
         /* === REPRODUCTOR INFERIOR === */
         .player {
           position: absolute;
@@ -166,13 +173,13 @@
           color: #fff;
           justify-content: space-between;
         }
-        
+
         .controls {
           display: flex;
           align-items: center;
           gap: 12px;
         }
-        
+
         .icon-btn {
           width: 44px;
           height: 44px;
@@ -183,15 +190,15 @@
           cursor: pointer;
           font-weight: 800;
         }
-        
+
         .icon-btn:hover {
           background: rgba(255, 255, 255, 0.15);
         }
-        
+
         #volRange {
           accent-color: var(--accent-1);
         }
-        
+
         .seek {
           flex: 1;
           display: flex;
@@ -199,14 +206,14 @@
           gap: 12px;
           margin: 0 12px;
         }
-        
+
         .mini {
           display: flex;
           align-items: center;
           gap: 12px;
           min-width: 260px;
         }
-        
+
         .mini .thumb {
           width: 56px;
           height: 56px;
@@ -214,11 +221,11 @@
           overflow: hidden;
           box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
         }
-        
+
         .mini .meta {
           min-width: 150px;
         }
-        
+
         .progress {
           height: 10px;
           background: rgba(255, 255, 255, 0.06);
@@ -226,7 +233,7 @@
           flex: 1;
           overflow: hidden;
         }
-        
+
         .progress > i {
           display: block;
           height: 100%;
@@ -234,17 +241,17 @@
           border-radius: 999px;
           background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
         }
-        
+
         .track-title {
           font-weight: 800;
           font-size: 14px;
         }
-        
+
         .track-sub {
           font-size: 12px;
           opacity: 0.9;
         }
-        
+
         /* === PANEL DE LETRAS === */
         .lyrics-panel {
           position: absolute;
@@ -271,41 +278,41 @@
           z-index: 15;
           pointer-events: auto;
         }
-        
+
         .lyrics-panel.show {
           opacity: 1;
           transform: translateY(0) scale(1);
         }
-        
+
         .lyrics-panel::-webkit-scrollbar {
           width: 6px;
         }
-        
+
         .lyrics-panel::-webkit-scrollbar-track {
           background: rgba(255, 255, 255, 0.05);
           border-radius: 10px;
         }
-        
+
         .lyrics-panel::-webkit-scrollbar-thumb {
           background: linear-gradient(180deg, #ff3d3d, #6b0000);
           border-radius: 10px;
         }
-        
+
         .lyrics-panel::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(180deg, #ff5555, #8b0000);
         }
-        
+
         .lyrics-line {
           opacity: 0.7;
           transition: all 0.3s ease;
         }
-        
+
         .lyrics-line.active {
           opacity: 1;
           color: #ff4d4d;
           text-shadow: 0 0 8px rgba(255, 80, 80, 0.8);
         }
-        
+
         /* === 🌐 RESPONSIVIDAD === */
         @media (max-width: 1024px) {
           .stage {
@@ -313,7 +320,7 @@
             height: auto;
             padding: 20px;
             /* Permite que el stage se haga scroll si el contenido es grande, ya que es el único contenedor en el centro */
-            overflow-y: auto; 
+            overflow-y: auto;
             max-height: 100vh;
           }
 
@@ -331,14 +338,14 @@
           /* Hacemos que el panel de letras fluya DESPUÉS del reproductor en este breakpoint */
           .lyrics-panel {
             /* CLAVE: Cambiamos de position: absolute a position: relative */
-            position: relative; 
-            bottom: auto; 
-            right: auto; 
+            position: relative;
+            bottom: auto;
+            right: auto;
             width: 100%;
             max-height: 50vh;
             margin-top: 20px; /* Agregamos margen para separarlo del reproductor */
             /* Cambiamos el comportamiento de alineación del stage para que los elementos fluyan en orden */
-            align-self: center; 
+            align-self: center;
           }
         }
 
@@ -349,7 +356,7 @@
             min-height: 100vh; /* Asegura que el fondo cubra todo */
             overflow: auto; /* Anula overflow: hidden y permite el scroll */
             /* Desactivamos el centrado global para que el contenido fluya desde arriba */
-            display: block; 
+            display: block;
             align-items: initial;
             justify-content: initial;
           }
@@ -365,7 +372,7 @@
             flex-direction: column;
             align-items: center;
             /* CLAVE: Hacemos el stage visible para que el body pueda hacer scroll */
-            overflow: visible; 
+            overflow: visible;
           }
 
           /* CORRECCIÓN CRÍTICA 2: Hacer que el HUD fluya */
@@ -379,22 +386,22 @@
             margin-top: 10px;
             margin-bottom: 20px;
           }
-          
+
           /* Ajustar Carrusel y Cards */
           .carousel-wrap {
             width: 100%;
             height: 300px; /* Altura más pequeña para móvil */
             margin-top: 10px;
           }
-          
+
           .carousel {
             width: 100%;
             height: 300px;
           }
-          
+
           .card {
             /* Reducir el tamaño de las tarjetas */
-            --card-size: 140px; 
+            --card-size: 140px;
             width: var(--card-size);
             height: var(--card-size);
           }
@@ -406,9 +413,9 @@
           /* CORRECCIÓN CRÍTICA 3: Hacer que la burbuja de canción fluya debajo de las imágenes */
           .now-bubble {
             /* CLAVE: Cambiar de position: absolute a relative para que fluya después del carrusel */
-            position: relative; 
+            position: relative;
             top: auto;
-            transform: none; 
+            transform: none;
             margin-top: 20px;
             width: 80%;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -428,15 +435,15 @@
             margin-top: 25px; /* Separación del contenido superior */
             border-radius: 20px;
           }
-          
+
           .seek {
             width: 100%; /* Aseguramos que la barra de progreso tome todo el ancho */
             margin: 0;
             padding: 0 10px;
           }
-          
+
           .mini {
-            flex-direction: row; 
+            flex-direction: row;
             justify-content: space-between;
             width: 100%;
             min-width: auto;
@@ -461,7 +468,7 @@
             margin: 25px auto 30px auto; /* Margen superior e inferior para el scroll */
             border-radius: 15px;
             /* Aseguramos que se muestre en el flujo si está activo */
-            opacity: 1; 
+            opacity: 1;
             transform: none;
             transition: none;
           }
@@ -471,3 +478,81 @@
             font-size: 12px;
           }
         }
+    </style>
+</head>
+<body>
+    <!--
+      NOTA: Para que el apilamiento funcione (Carousel -> Burbuja -> Player -> Letras),
+      el orden de estos elementos en el HTML debe ser secuencial, ya que en móvil
+      todos usan 'position: relative' para fluir.
+    -->
+    <div class="stage">
+        <!-- 1. HUD SUPERIOR (Fluirá al principio) -->
+        <div class="hud-top">
+            <button class="active">Explorar</button>
+            <button>Mi Música</button>
+            <button>Radio</button>
+        </div>
+
+        <!-- 2. CARRUSEL CENTRAL (Las imágenes) -->
+        <div class="carousel-wrap">
+            <div class="carousel">
+                <!-- Tarjetas de ejemplo (mantienen el estilo 3D) -->
+                <div class="card" style="transform: translate3d(-300px, 0, -200px) rotateY(15deg) translate(-50%, -50%); opacity: 0.5;">
+                    <span class="cover" style="background-image: url('https://placehold.co/250x250/333333/ffffff?text=Album+A');"></span>
+                </div>
+                <div class="card center" style="transform: translate(-50%, -50%) scale(1.3);">
+                    <span class="cover" style="background-image: url('https://placehold.co/250x250/B02A37/ffffff?text=Album+B');"></span>
+                </div>
+                <div class="card" style="transform: translate3d(300px, 0, -200px) rotateY(-15deg) translate(-50%, -50%); opacity: 0.5;">
+                    <span class="cover" style="background-image: url('https://placehold.co/250x250/666666/ffffff?text=Album+C');"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. BURBUJA DE CANCIÓN ACTUAL (Texto debajo de las imágenes) -->
+        <div class="now-bubble">
+            Escuchando ahora: <br> "Canción de Prueba"
+        </div>
+
+        <!-- 4. REPRODUCTOR INFERIOR (Controles) -->
+        <div class="player">
+            <div class="mini">
+                <div class="thumb">
+                    <span class="cover" style="background-image: url('https://placehold.co/56x56/B02A37/ffffff?text=B');"></span>
+                </div>
+                <div class="meta">
+                    <div class="track-title">Canción de Prueba</div>
+                    <div class="track-sub">Artista Fantasma</div>
+                </div>
+            </div>
+
+            <div class="seek">
+                <div class="progress"><i></i></div>
+                <div class="time">2:30 / 4:15</div>
+            </div>
+
+            <div class="controls">
+                <div class="icon-btn">⏪</div>
+                <div class="icon-btn" style="background: var(--accent-1);">▶</div>
+                <div class="icon-btn">⏩</div>
+                <input type="range" id="volRange" min="0" max="100" value="70" style="width: 80px;">
+            </div>
+        </div>
+
+        <!-- 5. PANEL DE LETRAS (Letras, con scroll si es necesario) -->
+        <div class="lyrics-panel show" style="opacity: 1; transform: none; right: auto; bottom: auto;">
+            <h2>Letras de la Canción</h2>
+            <div class="lyrics-line active">¡Hola! Esto ahora está abajo del reproductor.</div>
+            <div class="lyrics-line">El scroll aparecerá automáticamente si las letras son largas.</div>
+            <div class="lyrics-line">Ya no se superpone el texto con las imágenes.</div>
+            <div class="lyrics-line">Esto es un ejemplo para probar el scroll.</div>
+            <div class="lyrics-line">Esto es un ejemplo para probar el scroll.</div>
+            <div class="lyrics-line">Esto es un ejemplo para probar el scroll.</div>
+            <div class="lyrics-line">Esto es un ejemplo para probar el scroll.</div>
+            <div class="lyrics-line">Esto es un ejemplo para probar el scroll.</div>
+            <div class="lyrics-line">Fin del ejemplo.</div>
+        </div>
+    </div>
+</body>
+</html>
