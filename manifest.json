@@ -1,21 +1,22 @@
 {
   "name": "Reproductor 3D",
-  "short_name": "Repro3D",
-  "start_url": "/index.html",
+  "short_name": "Reproductor3D",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#ff9ae0",
-  "description": "Reproductor musical 3D interactivo.",
+  "theme_color": "#1db954",
   "icons": [
     {
-      "src": "https://rereproductor3d.onrender.com/assets/img/poster.jpg",
-      "sizes": "512x512",
-      "type": "image/jpg"
+      "src": "assets/img/fondoS.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
     },
     {
-      "src": "https://rereproductor3d.onrender.com/assets/img/fondo5.jpg",
-      "sizes": "192x192",
-      "type": "image/jpg"
+      "src": "assets/img/fondoS.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "maskable"
     }
   ]
 }
