@@ -341,7 +341,7 @@
                 border-radius: 0;
             }
 
-            /* === CRÍTICO: El HUD debe fluir al inicio === */
+            /* === CRÍTICO: El HUD debe fluir al inicio y CENTRAR === */
             .hud-top {
                 position: relative;
                 top: auto;
@@ -351,7 +351,7 @@
                 margin-top: 10px;
                 margin-bottom: 20px;
                 width: 95%;
-                justify-content: space-around;
+                justify-content: center; /* CORREGIDO: Centra los botones */
             }
 
             /* === Centrado del Carrusel 3D para móvil === */
@@ -363,7 +363,6 @@
                 display: flex;
                 justify-content: center; /* Centrado Horizontal Limpio */
                 align-items: center;
-                /* IMPORTANTE: Eliminé el padding-left: 10px que causaba desplazamiento */
             }
 
             .carousel {
@@ -382,16 +381,18 @@
                 filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
             }
 
-            /* === CRÍTICO: La burbuja debe fluir debajo del carrusel === */
+            /* === CRÍTICO: La burbuja debe fluir debajo del carrusel y CENTRAR === */
             .now-bubble {
                 position: relative;
                 top: auto;
                 transform: none;
                 margin-top: 25px;
                 width: 90%;
+                margin-left: auto; /* Centrar con margin */
+                margin-right: auto;
             }
 
-            /* === CRÍTICO: El Reproductor debe fluir debajo de la burbuja === */
+            /* === CRÍTICO: El Reproductor debe fluir debajo y CENTRAR METADATOS === */
             .player {
                 position: relative;
                 bottom: auto;
@@ -406,14 +407,18 @@
             }
 
             .mini {
-                flex-direction: row;
-                justify-content: space-between;
+                flex-direction: column; /* CORREGIDO: Apilamos imagen y texto */
+                align-items: center; /* CORREGIDO: Centramos la imagen y el texto */
                 width: 100%;
                 min-width: auto;
+                gap: 8px; /* Espacio reducido */
             }
+
             .mini .meta {
-                text-align: right;
+                text-align: center; /* CORREGIDO: Centrar el nombre de la canción */
+                min-width: auto;
             }
+
             .seek {
                 width: 100%;
                 margin: 0;
@@ -423,16 +428,19 @@
                 justify-content: space-around;
             }
 
-            /* CRÍTICO: Panel de Letras se apila al final */
+            /* CRÍTICO: Panel de Letras se apila al final y asegura Scrollbar */
             .lyrics-panel {
                 position: relative;
                 bottom: auto;
                 right: auto;
                 width: 95%;
+                max-width: 95%; /* Asegurar que no desborde */
                 font-size: 14px;
                 max-height: 50vh;
                 margin: 25px auto 30px auto;
                 transform: none;
+                box-sizing: border-box; /* Asegura que el padding no desborde el scroll */
+                padding: 15px;
             }
         }
     </style>
