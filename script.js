@@ -3,9 +3,9 @@
     const albums = [
       {
         title: 'Lost in the Night',
-        artist: 'Glass Animals',
-        cover: 'assets/img/fondo5.jpg',
-        song: 'assets/music/Lost in the Night.mp3',
+        artist: 'Alexander',
+        cover: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/img/fondo5.jpg',
+        song: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/music/Lost in the Night.mp3',
         lyrics: `Yeah…
 Late night in Miami, baby
 (Sabes que me pierdo en tu piel…)
@@ -67,9 +67,9 @@ Baby, I’ll still come back for more…`,
       },
       {
         title: 'Dime que no',
-        artist: 'Ed Sheeran',
-        cover: 'assets/img/poster.jpg',
-        song: 'assets/music/Dime que no.mp3',
+        artist: 'Alexander',
+        cover: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/img/poster.jpg',
+        song: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/music/Dime que no.mp3',
         lyrics: `Mmm…
 You want me, don’t you?
 But you can’t have me…
@@ -144,9 +144,9 @@ Para volver… otra vez.`,
       },
       {
         title: 'Entre la Noche y la Ciudad',
-        artist: 'Ed Sheeran',
-        cover: 'assets/img/fondo16.jpg',
-        song: 'assets/music/Entre la Noche y la Ciudad.mp3',
+        artist: 'Alexander',
+        cover: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/img/fondo16.jpg',
+        song: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/music/Entre la Noche y la Ciudad.mp3',
         lyrics: `Las luces bailan en el río
 Sombras flotan en el frío
 Un susurro que no puedo atrapar
@@ -197,9 +197,9 @@ Entre la noche y la ciudad`,
       },
       {
         title: 'Tú y Yo en Su Plan',
-        artist: 'Ed Sheeran',
-        cover: 'assets/img/fondo7.jpg',
-        song: 'assets/music/Gracias Dios.mp3',
+        artist: 'Alexander',
+        cover: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/img/fondo7.jpg',
+        song: 'https://raw.githubusercontent.com/Alexander-Manosalva-Peralta/Rereproductor3d/main/assets/music/Gracias Dios.mp3',
         lyrics: `No fue casualidad, fue su voz la que habló,
 en medio del ruido, su luz nos llamó.
 Entre tantas almas, tus ojos brillaron,
